@@ -17,16 +17,23 @@
     ctx.translate(radius, radius);
     radius = radius * 0.90
     //drawClock();
+    //setInterval(drawClock, 1000);
 
+    window.requestAnimFrame = (function(){
+        return  window.requestAnimationFrame       ||
+                window.webkitRequestAnimationFrame ||
+                window.mozRequestAnimationFrame    ||
+                function( callback ){
+                    window.setTimeout(callback, 1000);
+                };
+    })();
 
     function draw() {
-        requestAnimationFrame(draw);
+        window.requestAnimFrame(draw);
         drawClock();
     }
 
     draw();
-
-    //setInterval(drawClock, 1000);
 
     function drawClock() {
         drawFace(ctx, radius);
